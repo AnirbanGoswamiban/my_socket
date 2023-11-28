@@ -1,4 +1,5 @@
 const { log } = require("console");
+require('dotenv').config();
 const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -6,6 +7,7 @@ const { Server } = require("socket.io");
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, { /* options */ });
+const port = process.env.PORT || 3000;
 
 let total_client=new Set()
 
@@ -27,6 +29,6 @@ io.on("connection",(socket)=>{
     })
 })
 
-httpServer.listen(3000,()=>{
-    console.log("server is runnin");
+httpServer.listen(port,()=>{
+    console.log(`server is runnin ${port}`);
 });
